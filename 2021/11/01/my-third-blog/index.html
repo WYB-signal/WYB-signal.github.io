@@ -4,10 +4,10 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="My-second-blog, WYB-signal">
-    <meta name="description" content="vulhub靶场环境搭建+ThinkPHP V5.0.20漏洞复现
-​    首先我们来进行靶场环境的搭建过程阐述。
-第一步：连接下载镜像源。需要一些配置，而且需要更新源。官方的kali源是http://www.kali.org/。不但更新">
+    <meta name="keywords" content="my-third-blog, WYB-signal">
+    <meta name="description" content="​                                                    关于CTF中ZIP文件夹的常见套路
+1.压缩包的隐写：
+​    实际上压缩包本来是不具备隐藏信息的功能的，但是由于在CTF竞赛中，经">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -19,7 +19,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>My-second-blog | WYB-signal</title>
+    <title>my-third-blog | WYB-signal</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -418,12 +418,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/2.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/1.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">My-second-blog</h1>
+                    <h1 class="description center-align post-title">my-third-blog</h1>
                 </div>
             </div>
         </div>
@@ -551,7 +551,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-10-23
+                    2021-11-01
                 </div>
                 
 
@@ -572,58 +572,12 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h1 id="vulhub靶场环境搭建-ThinkPHP-V5-0-20漏洞复现"><a href="#vulhub靶场环境搭建-ThinkPHP-V5-0-20漏洞复现" class="headerlink" title="vulhub靶场环境搭建+ThinkPHP V5.0.20漏洞复现"></a>vulhub靶场环境搭建+ThinkPHP V5.0.20漏洞复现</h1><hr>
-<p>​    首先我们来进行靶场环境的搭建过程阐述。</p>
-<p><strong>第一步：连接下载镜像源。需要一些配置，而且需要更新源。官方的kali源是<a target="_blank" rel="noopener" href="http://www.kali.org/%E3%80%82%E4%B8%8D%E4%BD%86%E6%9B%B4%E6%96%B0%E7%9A%84%E6%85%A2%EF%BC%8C%E8%80%8C%E4%B8%94%E6%98%AF%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5%E5%88%B0docker%E5%AE%98%E7%BD%91%E3%80%82%E6%89%80%E4%BB%A5%EF%BC%8C%E4%B8%BA%E4%BA%86docker%E6%90%AD%E5%BB%BA%E5%B0%B1%E6%97%A0%E6%B3%95%E4%BD%BF%E7%94%A8%E5%AE%98%E6%96%B9%E6%BA%90%E8%BF%9B%E8%A1%8C%E6%9B%B4%E6%96%B0%EF%BC%8C%E6%88%91%E5%B0%9D%E8%AF%95%E8%BF%87%E4%B8%80%E4%B8%8B%E5%87%A0%E7%A7%8D%E6%8C%87%E4%BB%A4%E6%98%AF%E5%8F%AF%E8%A1%8C%E7%9A%84%E3%80%82%EF%BC%88%E5%BD%93%E7%84%B6%E5%8F%AF%E8%83%BD%E5%9B%A0%E4%B8%BA%E6%88%91%E7%BD%91%E7%BB%9C%E7%9A%84%E9%97%AE%E9%A2%98%EF%BC%8C%E6%89%80%E4%BB%A5%E5%AF%BC%E8%87%B4%E6%97%A0%E6%B3%95%E7%9B%B4%E8%BF%9E%E4%BA%91%E7%9A%84%E6%BA%90%E6%97%A0%E6%B3%95%E4%B8%8B%E8%BD%BD%EF%BC%89">http://www.kali.org/。不但更新的慢，而且是无法连接到docker官网。所以，为了docker搭建就无法使用官方源进行更新，我尝试过一下几种指令是可行的。（当然可能因为我网络的问题，所以导致无法直连云的源无法下载）</a></strong></p>
-<hr>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget &amp;&amp; wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo -O /etc/yum.repos.d/docker-ce.repo</span><br></pre></td></tr></table></figure>
-
-<p><strong>按理说说先可以使用 curl -s <a target="_blank" rel="noopener" href="https://get.docker.com/">https://get.docker.com/</a> | sh 的指令进行docker下载，但我的kali同样是无法将dockerproject部分文件索引且无法转换而使用。</strong></p>
-<hr>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -s https://get.docker.com/ | sh</span><br></pre></td></tr></table></figure>
-
-<p><strong>接下来，尝试一下其他的指令，apt install docker-ce-18.06.1.ce-3.el7 的指令但此时的报错是无法定位到软件包，说明kali机内部也没有docker的软件包</strong></p>
-<hr>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install docker-ce-18.06.1.ce-3.el7</span><br></pre></td></tr></table></figure>
-
-<p> <strong>转为第三个 apt-get update &amp;&amp; apt-get install docker.io ,应该是直接连接到官网，但是貌似网传说是docker的官网包含有病毒，所以kali官方就禁止了这个渠道</strong></p>
-<hr>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get update &amp;&amp; apt-get install docker.io</span><br></pre></td></tr></table></figure>
-
-<p><strong>使用指令 apt-get install docker.io 是最后一个法子，当然成功了，完成了docker包的下载。</strong></p>
-<hr>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install docker.io</span><br></pre></td></tr></table></figure>
-
-<p><strong>第二步：docker的安装：这个步骤并没有那么困难，在下载好docker资源包后用docker ps 来查看docker是否开启。再用 docker –version 指令查看是否下载 docker 以及版本号。</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps #查看docker是否开启</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker --version #查看是否下载docker以及版本号</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p><strong>第三步:docker-compose的下载：使用 pip install docker-compose 等待进度条跑完就下载完成docker-compose，中间提示就选着Y然后Y就回车就好了。第二遍指令同样是pip install docker-compose,等待下载完即可完成。</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install docker-compose</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p><strong>最后查询指令 docker-compose –version ，查询 docker-compose 是否安装完成。返回“docker-compose version 1.29.2 ,   build unknown”提示即安装完成。</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p><strong>在做完前期漏洞搭建以后，即是完成了最基本的环境搭建工作。接下来，需要将得到vulhub资源解压拖进kali机内，然后依次在“vulhub文件夹中”找到t“thinkphp文件夹”，，然后再找到“5-rce文件夹”，在文件夹内右键点击选择“在这里打开终端”。接下去，输入命令“sudo docker-composeup-d”开启docker容器。至此完成搭建。</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker-composeup-d</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p><strong>最后，输入“docker ps”在此查看端口映射位置，再用自己的“IP地址：端口号”，在浏览器中进行访问解析，能正常访问弹出页面，就是搭建完成。</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
-
-<hr>
-<p>​                                                                      <strong>漏洞复现</strong></p>
-<p>​    <strong>第一步：首先访问网站：搭建IP加映射端口：IP:(端口号)</strong></p>
-<hr>
-<p><strong>第二步：获取架构版本号：因为本网站是TP5的架构，且有个 ThinkPHP v5 字样。综上所述，因为是PHP框架，所以我们肯定会有index.php文件。正常来说，你乱搞是搞不出来正确的架构号，只会报出对应Apache的架构号，暂时是没法下手的。后来，一位好心的老师傅提醒我，一般“？s=1”,如此这般我就获取到了他的详细版本号是 ThinkPHP V5.0.20 的详细架构号，接下来就可以搞事情了。</strong></p>
-<hr>
-<p><strong>第四步：找到他的漏洞：在网上搜索 ThinkPHP V5.0.20的漏洞，查询到他的 exp远程执行漏洞，所以在 http://(IP):(端口号)/index.php后面，加上“？s=/index/\think\app\invokefunction&amp;function=call user func_array&amp;vars[0]=file_put_contents&amp;vars[1][]=test.php&amp;vars[1][]=dir”代码即可对后端电脑文件进行查询，将红字部分的 dir 用 whoami 或者 ipconfig 替代即可得到用户名或IP。此时，既然他可以远程执行，那么我们就可以进行远程注入一句话木马，注入木马后得到“27”界面。</strong></p>
-<hr>
-<p><strong>得到上述界面后，我们保留页面，打开“中国蚁剑”，点击空白处，“添加数据”，在url中输入木马位置，例如我们一句话木马是test.php，那么我的 url 就应该是 http://(IP):(端口号)/test.php ，然后输入木马的密码，点击保存即可。最后右键点击“新建虚拟终端”，拿到成功界面，即是完成复现。</strong></p>
+                <p>​                                                    <strong>关于CTF中ZIP文件夹的常见套路</strong></p>
+<p><strong>1.压缩包的隐写：</strong></p>
+<p>​    实际上压缩包本来是不具备隐藏信息的功能的，但是由于在CTF竞赛中，经常会出现压缩包的与隐写术结合的题目，所以我们需要掌握一些关于CTF竞赛中常见的分析手段和考察方向。当然，压缩包的考察手段一般以组合出现，所以思考时需要慎重。</p>
+<p><strong>2.需要工具：winhex</strong></p>
+<p>​    winhex是一款取证软件，而且是一个非常优秀的16进制编辑器，在winhex中我们可以查询到各种文件的16进制值，例如在winhex中查看16进制下ZIP文件是以“50 4B 03 04”开头，又以“50 4B 04 05”结尾的。不同的文件在winhex下的头尾不同，至于具体详细的用法，我们在接下来的实战中分析。</p>
+<p><strong>3.CTF中常见的压缩包套路：</strong></p>
 
                 
             </div>
@@ -650,7 +604,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/10/23/my-secode-blog/">http://example.com/2021/10/23/my-secode-blog/</a>
+                    <a href="http://example.com/2021/11/01/my-third-blog/">http://example.com/2021/11/01/my-third-blog/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1123,9 +1077,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2021/11/01/my-third-blog/">
                     <div class="card-image">
@@ -1143,9 +1098,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-11-01
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-01
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -1154,6 +1109,7 @@
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -1164,13 +1120,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/10/17/my-first-blog/">
+                <a href="/2021/10/23/my-secode-blog/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/0.jpg" class="responsive-img" alt="my-first-blog">
+                        <img src="/medias/featureimages/2.jpg" class="responsive-img" alt="My-second-blog">
                         
-                        <span class="card-title">my-first-blog</span>
+                        <span class="card-title">My-second-blog</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1181,7 +1137,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-17
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-10-23
                             </span>
                         <span class="publish-author">
                             
