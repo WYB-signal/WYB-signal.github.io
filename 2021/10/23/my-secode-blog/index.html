@@ -578,28 +578,52 @@
 <hr>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum install -y wget &amp;&amp; wget https://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo -O /etc/yum.repos.d/docker-ce.repo</span><br></pre></td></tr></table></figure>
 
-<p><img src="C:\Users\WYB\AppData\Roaming\Typora\typora-user-images\image-20211023154325538.png" alt="image-20211023154325538"></p>
 <p><strong>按理说说先可以使用 curl -s <a target="_blank" rel="noopener" href="https://get.docker.com/">https://get.docker.com/</a> | sh 的指令进行docker下载，但我的kali同样是无法将dockerproject部分文件索引且无法转换而使用。</strong></p>
 <hr>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl -s https://get.docker.com/ | sh</span><br></pre></td></tr></table></figure>
 
-<p><img src="C:\Users\WYB\AppData\Roaming\Typora\typora-user-images\image-20211023154538946.png" alt="image-20211023154538946"></p>
 <p><strong>接下来，尝试一下其他的指令，apt install docker-ce-18.06.1.ce-3.el7 的指令但此时的报错是无法定位到软件包，说明kali机内部也没有docker的软件包</strong></p>
 <hr>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt install docker-ce-18.06.1.ce-3.el7</span><br></pre></td></tr></table></figure>
 
-<p><img src="C:\Users\WYB\AppData\Roaming\Typora\typora-user-images\image-20211023154827468.png" alt="image-20211023154827468"></p>
 <p> <strong>转为第三个 apt-get update &amp;&amp; apt-get install docker.io ,应该是直接连接到官网，但是貌似网传说是docker的官网包含有病毒，所以kali官方就禁止了这个渠道</strong></p>
 <hr>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get update &amp;&amp; apt-get install docker.io</span><br></pre></td></tr></table></figure>
 
-<p><img src="C:\Users\WYB\AppData\Roaming\Typora\typora-user-images\image-20211023155239764.png" alt="image-20211023155239764"></p>
 <p><strong>使用指令 apt-get install docker.io 是最后一个法子，当然成功了，完成了docker包的下载。</strong></p>
 <hr>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apt-get install docker.io</span><br></pre></td></tr></table></figure>
 
-<p><img src="C:\Users\WYB\AppData\Roaming\Typora\typora-user-images\image-20211023155408378.png" alt="image-20211023155408378"></p>
+<p><strong>第二步：docker的安装：这个步骤并没有那么困难，在下载好docker资源包后用docker ps 来查看docker是否开启。再用 docker –version 指令查看是否下载 docker 以及版本号。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps #查看docker是否开启</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker --version #查看是否下载docker以及版本号</span><br></pre></td></tr></table></figure>
+
 <hr>
+<p><strong>第三步:docker-compose的下载：使用 pip install docker-compose 等待进度条跑完就下载完成docker-compose，中间提示就选着Y然后Y就回车就好了。第二遍指令同样是pip install docker-compose,等待下载完即可完成。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install docker-compose</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>最后查询指令 docker-compose –version ，查询 docker-compose 是否安装完成。返回“docker-compose version 1.29.2 ,   build unknown”提示即安装完成。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker-compose --version</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>在做完前期漏洞搭建以后，即是完成了最基本的环境搭建工作。接下来，需要将得到vulhub资源解压拖进kali机内，然后依次在“vulhub文件夹中”找到t“thinkphp文件夹”，，然后再找到“5-rce文件夹”，在文件夹内右键点击选择“在这里打开终端”。接下去，输入命令“sudo docker-composeup-d”开启docker容器。至此完成搭建。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo docker-composeup-d</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p><strong>最后，输入“docker ps”在此查看端口映射位置，再用自己的“IP地址：端口号”，在浏览器中进行访问解析，能正常访问弹出页面，就是搭建完成。</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker ps</span><br></pre></td></tr></table></figure>
+
+<hr>
+<p>​                                                                      <strong>漏洞复现</strong></p>
+<p>​    <strong>第一步：首先访问网站：搭建IP加映射端口：IP:(端口号)</strong></p>
+<hr>
+<p><strong>第二步：获取架构版本号：因为本网站是TP5的架构，且有个 ThinkPHP v5 字样。综上所述，因为是PHP框架，所以我们肯定会有index.php文件。正常来说，你乱搞是搞不出来正确的架构号，只会报出对应Apache的架构号，暂时是没法下手的。后来，一位好心的老师傅提醒我，一般“？s=1”,如此这般我就获取到了他的详细版本号是 ThinkPHP V5.0.20 的详细架构号，接下来就可以搞事情了。</strong></p>
+<hr>
+<p><strong>第四步：找到他的漏洞：在网上搜索 ThinkPHP V5.0.20的漏洞，查询到他的 exp远程执行漏洞，所以在 http://(IP):(端口号)/index.php后面，加上“？s=/index/\think\app\invokefunction&amp;function=call user func_array&amp;vars[0]=file_put_contents&amp;vars[1][]=test.php&amp;vars[1][]=dir”代码即可对后端电脑文件进行查询，将红字部分的 dir 用 whoami 或者 ipconfig 替代即可得到用户名或IP。此时，既然他可以远程执行，那么我们就可以进行远程注入一句话木马，注入木马后得到“27”界面。</strong></p>
+<hr>
+<p><strong>得到上述界面后，我们保留页面，打开“中国蚁剑”，点击空白处，“添加数据”，在url中输入木马位置，例如我们一句话木马是test.php，那么我的 url 就应该是 http://(IP):(端口号)/test.php ，然后输入木马的密码，点击保存即可。最后右键点击“新建虚拟终端”，拿到成功界面，即是完成复现。</strong></p>
 
                 
             </div>
